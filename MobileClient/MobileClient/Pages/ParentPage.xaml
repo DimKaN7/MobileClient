@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileClient.Pages.ParentPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Label Text="Имя: " />
+                <Entry Text="{Binding Path=Model.Name}" FontSize="Medium" />
+                <Label Text="Дата рождения:" />
+                <Entry Text="{Binding Path=Model.Age}" FontSize="Medium" />
+                <Label Text="Количество детей: " />
+                <Entry Text="{Binding Path=Model.ChildCount}" FontSize="Medium" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Сохранить" Command="{Binding ViewModel.SavePersonCommand}" CommandParameter="{Binding Model}" />
+                <Button Text="Назад" Command="{Binding Path=ViewModel.BackCommand}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

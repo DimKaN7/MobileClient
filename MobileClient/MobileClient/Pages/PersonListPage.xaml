@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileClient.PersonListPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <Button Text="Добавить человека" Clicked="OnButtonAddClicked" IsEnabled="{Binding IsLoaded}" />
+            <Button Text="Добавить женатого/замужнего человека" Clicked="OnButtonAddClicked" IsEnabled="{Binding IsLoaded}" />
+            <Button Text="Добавить родителя" Clicked="OnButtonAddClicked" IsEnabled="{Binding IsLoaded}" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Entry x:Name="entryNum" WidthRequest="40" Grid.Column="0"/>
+                <Button Text="Изменить" Clicked="OnButtonEditClicked" Grid.Column="1" IsEnabled="{Binding IsLoaded}"/>
+                <Button Text="Удалить" Clicked="OnButtonDeleteClicked" Grid.Column="2" IsEnabled="{Binding IsLoaded}"/>
+            </Grid>
+            <ListView x:Name="personsList" ItemsSource="{Binding Persons}" 
+                      HasUnevenRows="True" ItemSelected="PersonsList_ItemSelected"
+                      SeparatorColor="Black">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout>
+                                    <Label Text="{Binding PropertiesFirst}" FontSize="Medium" />
+                                    <Label Text="{Binding PropertiesSecond}" FontSize="Small" />
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid IsVisible="{Binding IsLoaded}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Запрос 1" Clicked="OnButtonRequest1Clicked" Grid.Column="0" IsEnabled="{Binding IsLoaded}"/>
+                <Button Text="Запрос 2" Clicked="OnButtonRequest2Clicked" Grid.Column="1" IsEnabled="{Binding IsLoaded}"/>
+                <Button x:Name="ButtonCustomPrinting" Text="Выборочная печать" Clicked="OnButtonCustomPrintingClicked"
+                        Grid.Column="2" IsEnabled="{Binding IsLoaded}" />
+            </Grid>
+            <StackLayout IsVisible="{Binding IsBusy}"
+                    HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="20">
+                <Label Text="Загрузка данных..." TextColor="Gray" HorizontalOptions="Center" />
+                <ActivityIndicator IsRunning="{Binding IsBusy}" Color="Accent" >
+                </ActivityIndicator>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
